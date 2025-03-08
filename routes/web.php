@@ -17,6 +17,10 @@ use App\Http\Controllers\Admin\FeedbackController as AdminFeedbackController;
 use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 
+// driver routes
+use App\Http\Controllers\Driver\AuthController as DriverAuthController;
+use App\Http\Controllers\Driver\MainController as DriverMainController;
+use App\Http\Controllers\Driver\OrderController as DriverOrderController;
 
 // Frontend Routes
 use App\Http\Controllers\Frontend\MainController as FrontendMainController;
@@ -97,6 +101,21 @@ Route::prefix('admin')->group(function () {
         Route::get('profile', [AdminMainController::class, 'profile'])->name('profile');
         Route::put('profile/update', [AdminMainController::class, 'updateProfile'])->name('profile.update');
         Route::resource('users', AdminUserController::class);
+    });
+});
+
+// driver route 
+Route::prefix('driver')->group(function () {
+    Route::get('/login', [DriverAuthController::class, 'login'])->name('driver.login');
+    Route::post('/authenticate', [DriverAuthController::class, 'authenticate'])->name('driver.authenticate');
+    Route::post('/logout', [DriverAuthController::class, 'logout'])->name('driver.logout');
+    // Protected Routes (Only for Drivers)
+    Route::middleware(['auth', 'driver'])->name('driver.')->group(function () {
+        Route::get('/dashboard', [DriverMainController::class, 'index'])->name('dashboard');
+        Route::resource('orders', DriverOrderController::class);
+        Route::post('orders/update-location', [DriverOrderController::class, 'updateLocation'])
+         ->name('orders.updateLocation');
+
     });
 });
 

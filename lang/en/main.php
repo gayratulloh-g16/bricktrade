@@ -43,7 +43,7 @@ return [
     'have_some_questions'         => 'Have Some Questions?',
     'contact_form_description'    => 'Thank you for your interest in our services. Please fill out the form below or email us at the given address and we will get back to you promptly regarding your request.',
     'multi_engineering_solutions' => 'Multi-Disciplined Engineering Solutions',
-    'construction_since'          => 'South-central construction region since 2005',
+    'construction_since'          => 'South-central construction region since 2009',
     'more_about_us'               => 'More About Us',
     'request_for_quote'      => 'Request For Quote',
     'quote_description'      => 'Best Tools & Materials Used For Safe',
@@ -145,7 +145,7 @@ return [
 
     // Section Title and Description
     'our_bricks_title'        => 'Our <span>Bricks</span>',
-    'our_bricks_subtext'      => 'High-quality bricks produced for durable construction since 2005',
+    'our_bricks_subtext'      => 'High-quality bricks produced for durable construction since 2009',
 
     // Service Blocks
     'service_superior_quality_title'    => 'Superior Quality',
@@ -172,7 +172,7 @@ return [
     'service_expert_guidance_title'       => 'Expert Guidance',
     'service_expert_guidance_text'        => 'Our team is ready to support you with expert advice from project planning to installation.',
     'video_section_title'   => 'Build Your Dream<br> with Our Quality Bricks',
-    'video_section_text'    => 'Reliable brick production and construction excellence since 2005',
+    'video_section_text'    => 'Reliable brick production and construction excellence since 2009',
     'video_section_video_url' => 'https://www.youtube.com/watch?v=9pjF7gD7fwY',
 
     'clients_section_title'   => 'We Have Best <br> Corporate Partners',
@@ -180,7 +180,7 @@ return [
 
     // Solution Section
     'solution_title'                    => 'Innovative Brick Manufacturing Solutions',
-    'solution_subtitle'                 => 'Delivering durable, sustainable bricks since 2005',
+    'solution_subtitle'                 => 'Delivering durable, sustainable bricks since 2009',
     'solution_button_text'              => 'More About Us',
 
     'solution_feature_quality_title'    => 'Strict Quality Control',
@@ -197,7 +197,7 @@ return [
 
     // Services Section Three
     'services_section_title'    => 'What We <span>Do</span>',
-    'services_section_text'     => 'Delivering high-quality brick solutions since 2005',
+    'services_section_text'     => 'Delivering high-quality brick solutions since 2009',
 
     'service_residential_title' => 'Residential Brickwork',
     'service_residential_text'  => 'Enhance your home with our durable and stylish bricks designed for lasting beauty.',
@@ -232,13 +232,13 @@ return [
     'faq_feature_4' => 'Efficient Delivery',
 
     'shop_section_title' => 'Our Company <span>shop</span>',
-    'shop_section_text'  => 'South-central construction region since 2005',
+    'shop_section_text'  => 'South-central construction region since 2009',
 
     'testimonial_section_title' => 'The biggest thing we <br /><span>build is trust.</span>',
-    'testimonial_section_text'  => 'South-central construction region since 2005',
+    'testimonial_section_text'  => 'South-central construction region since 2009',
 
     'news_section_title' => 'Our Blog <span>Insight</span>',
-    'news_section_text'  => 'South-central construction region since 2005',
+    'news_section_text'  => 'South-central construction region since 2009',
     'view_all_posts'     => 'View All Posts',
     'comments'           => 'comments',
 
@@ -251,11 +251,11 @@ return [
     // Main Slider Section (Brick Industry)
     'main_slider_slide1_title'    => 'Build With Quality Bricks',
     'main_slider_slide1_subtitle' => 'Crafting enduring structures with premium bricks.',
-    'main_slider_slide1_text'     => 'Our brick solutions offer exceptional durability, energy efficiency, and aesthetic beauty. Since 2005, we transform visions into reality with expert craftsmanship.',
+    'main_slider_slide1_text'     => 'Our brick solutions offer exceptional durability, energy efficiency, and aesthetic beauty. Since 2009, we transform visions into reality with expert craftsmanship.',
 
     'main_slider_slide2_title'    => 'Innovative Brick Technology',
     'main_slider_slide2_subtitle' => 'Engineering excellence in every brick',
-    'main_slider_slide2_text'     => 'Our state-of-the-art manufacturing processes ensure precision and sustainability, making us a leader in the brick industry since 2005.',
+    'main_slider_slide2_text'     => 'Our state-of-the-art manufacturing processes ensure precision and sustainability, making us a leader in the brick industry since 2009.',
 
     'main_slider_slide3_title'    => 'Design With Brick Perfection',
     'main_slider_slide3_subtitle' => 'Bringing your architectural dreams to life',

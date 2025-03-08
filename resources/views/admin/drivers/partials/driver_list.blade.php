@@ -13,9 +13,9 @@
         <tbody>
             @forelse ($drivers as $driver)
                 <tr>
-                    <td>{{ $driver->first_name }}</td>
-                    <td>{{ $driver->last_name }}</td>
-                    <td>{{ $driver->phone_number }}</td>
+                    <td>{{ $driver->user->first_name }}</td>
+                    <td>{{ $driver->user->last_name }}</td>
+                    <td>{{ $driver->user->phone_number }}</td>
                     <td>{{ $driver->vehicle_number }}</td>
                     <td>{{ $driver->created_at->format('Y-m-d') }}</td>
                     <td class="text-end">

@@ -4,7 +4,6 @@
             <tr>
                 <th>Order ID</th>
                 <th>User</th>
-                <th>Driver</th>
                 <th>Order Date</th>
                 <th>Total Amount</th>
                 <th>Status</th>
@@ -17,25 +16,19 @@
                 <tr>
                     <td>{{ $order->id }}</td>
                     <td>{{ optional($order->user)->first_name ?? 'N/A' }} {{ optional($order->user)->last_name ?? 'N/A' }}</td>
-                    <td>
-                        @if($order->driver)
-                            {{ $order->driver->user->first_name }} {{ $order->driver->user->last_name }}
-                        @else
-                            N/A
-                        @endif
-                    </td>
+                    
                     <td>{{ $order->order_date }}</td>
                     <td>{{ $order->total_amount }}</td>
                     <td>{{ $order->order_status }}</td>
                     <td>{{ $order->shipping_address }}</td>
                     <td class="text-end">
-                        <a href="{{ route('admin.orders.show', $order->id) }}" class="btn btn-sm btn-info" title="View">
+                        <a href="{{ route('driver.orders.show', $order->id) }}" class="btn btn-sm btn-info" title="View">
                             <i class="bi bi-eye"></i>
                         </a>
-                        <a href="{{ route('admin.orders.edit', $order->id) }}" class="btn btn-sm btn-warning" title="Edit">
+                        <a href="{{ route('driver.orders.edit', $order->id) }}" class="btn btn-sm btn-warning" title="Edit">
                             <i class="bi bi-pencil"></i>
                         </a>
-                        <form action="{{ route('admin.orders.destroy', $order->id) }}" method="POST" class="d-inline-block" onsubmit="return confirm('Are you sure you want to delete this order?');">
+                        <form action="{{ route('driver.orders.destroy', $order->id) }}" method="POST" class="d-inline-block" onsubmit="return confirm('Are you sure you want to delete this order?');">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-danger" title="Delete">

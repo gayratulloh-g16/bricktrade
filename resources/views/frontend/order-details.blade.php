@@ -62,27 +62,37 @@
                     </div>
                 </div>
 
-                <!-- Driver Information (if available) -->
+                <!-- Driver Information -->
                 @if ($order->driver)
-                <div class="row mb-4">
-                    <div class="col-md-12">
-                        <h5>{{ __('main.driver_information') }}</h5>
-                        <ul class="list-unstyled">
-                            <li>
-                                <strong>{{ __('main.driver_name') }}:</strong>
-                                {{ $order->driver->first_name }} {{ $order->driver->last_name }}
-                            </li>
-                            <li>
-                                <strong>{{ __('main.phone_number') }}:</strong>
-                                {{ $order->driver->phone_number }}
-                            </li>
-                            <li>
-                                <strong>{{ __('main.vehicle_number') }}:</strong>
-                                {{ $order->driver->vehicle_number }}
-                            </li>
-                        </ul>
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <h5>{{ __('main.driver_information') }}</h5>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <strong>{{ __('main.driver_name') }}:</strong>
+                                    {{ $order->driver->user->first_name }} {{ $order->driver->user->last_name }}
+                                </li>
+                                <li>
+                                    <strong>{{ __('main.phone_number') }}:</strong>
+                                    {{ $order->driver->user->phone_number }}
+                                </li>
+                                <li>
+                                    <strong>{{ __('main.vehicle_number') }}:</strong>
+                                    {{ $order->driver->vehicle_number }}
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
+
+                    <!-- Driver Location Map -->
+                    @if ($order->driver->latitude && $order->driver->longitude)
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <h5>Driver Location</h5>
+                                <div id="driverMap" style="width: 100%; height: 300px; border: 1px solid #ddd; border-radius: 8px;"></div>
+                            </div>
+                        </div>
+                    @endif
                 @endif
 
                 <h5>{{ __('main.order_items') }}</h5>
@@ -116,12 +126,10 @@
                     </table>
                 </div>
 
-                <!-- Feedback or Feedback Form -->
+                <!-- Feedback Section (if order is completed) -->
                 @if ($order->order_status === 'completed')
                     @if ($order->feedback)
-                        <!-- Display Existing Feedback -->
-                        <div class="feedback-display mt-4 p-3"
-                             style="border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
+                        <div class="feedback-display mt-4 p-3" style="border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
                             <h5 style="margin-bottom: 10px;">{{ __('main.your_review') }}</h5>
                             <div class="star-rating-display mb-2" style="font-size: 1.5rem;">
                                 @for ($i = 1; $i <= 5; $i++)
@@ -135,9 +143,7 @@
                             <p>{{ $order->feedback->text }}</p>
                         </div>
                     @else
-                        <!-- Display Feedback Submission Form -->
-                        <div class="feedback-section mt-4"
-                             style="border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9; padding: 20px;">
+                        <div class="feedback-section mt-4" style="border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9; padding: 20px;">
                             <h5>{{ __('main.add_your_review') }}</h5>
                             <form action="{{ route('feedback.store') }}" method="POST">
                                 @csrf
@@ -145,8 +151,7 @@
                                 <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                                 <div class="rating-form mb-3">
                                     <p>{{ __('main.your_rating') }}</p>
-                                    <div class="star-rating"
-                                         style="direction: rtl; font-size: 1.5rem; display: inline-flex;">
+                                    <div class="star-rating" style="direction: rtl; font-size: 1.5rem; display: inline-flex;">
                                         <input type="radio" id="star5" name="rating" value="5" required style="display: none;">
                                         <label for="star5" title="5 stars" style="cursor: pointer;">
                                             <i class="fa-solid fa-star" style="color: #ccc;"></i>
@@ -196,10 +201,38 @@
                     @endif
                 @endif
 
-                <div class="text-right mt-3">
+                <div class="text-end mt-3">
                     <a href="{{ route('orders') }}" class="btn btn-secondary">{{ __('main.back_to_orders') }}</a>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Include Google Maps API if driver location map is needed -->
+    @if($order->driver && $order->driver->latitude && $order->driver->longitude)
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVuUZoGEdvTXYp2ob1wQ5gVdvNqYZT1H4"></script>
+        <script>
+            function initDriverMap() {
+                var lat = parseFloat("{{ $order->driver->latitude }}");
+                var lng = parseFloat("{{ $order->driver->longitude }}");
+                var driverLocation = { lat: lat, lng: lng };
+                var map = new google.maps.Map(document.getElementById("driverMap"), {
+                    center: driverLocation,
+                    zoom: 14,
+                });
+                var marker = new google.maps.Marker({
+                    position: driverLocation,
+                    map: map,
+                    title: "Driver Location",
+                });
+            }
+            window.onload = initDriverMap;
+        </script>
+        <!-- Map Container -->
+        <div class="auto-container my-5">
+            <h5>Driver Live Location</h5>
+            <div id="driverMap" style="width: 100%; height: 300px; border: 1px solid #ddd; border-radius: 8px;"></div>
+        </div>
+    @endif
+
 </x-layouts.frontend>

@@ -22,7 +22,7 @@
                 <div class="content-column col-lg-6 col-md-12 col-sm-12">
                     <div class="inner-column">
                         <div class="sec-title">
-                            <div class="title">South-central construction region since 2005</div>
+                            <div class="title">South-central construction region since 2009</div>
                             <h2>Comfortable <span>joining</span> <br> in one open space.</h2>
                             <div class="text">USA Construction Company, Inc. was founded in 2003 and quickly
                                 established a reputation for top quality work. Throughout our history, one philosophy

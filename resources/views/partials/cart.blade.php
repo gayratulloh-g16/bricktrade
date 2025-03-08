@@ -11,7 +11,7 @@
           <img src="{{ $item['image'] ? asset('/storage/' . $item['image']) : '/frontend/assets/images/resource/products/thumb-default.jpg' }}" alt="">
         </div>
         <h3><a href="{{ route('cart.view') }}">{{ $item['name'] }}</a></h3>
-        <div class="quantity-text">Quantity: {{ $item['quantity'] }}</div>
+        <div class="quantity-text">{{ __('main.quantity')}}: {{ $item['quantity'] }}</div>
         <div class="price">{{ number_format($item['price'], 2) }} So'm</div>
       </div>
     </div>

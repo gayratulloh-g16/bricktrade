@@ -50,7 +50,7 @@
                                         <option value="">Select Driver</option>
                                         @foreach($drivers as $driver)
                                             <option value="{{ $driver->id }}" {{ old('driver_id', $order->driver_id) == $driver->id ? 'selected' : '' }}>
-                                                {{ $driver->first_name }} {{ $driver->last_name }}
+                                                {{ $driver->user->first_name }} {{ $driver->user->last_name }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -77,7 +77,7 @@
                                     <select name="order_status" id="order_status" class="form-select" required>
                                         <option value="">Select Order Status</option>
                                         <option value="new" {{ old('order_status', $order->order_status) == 'new' ? 'selected' : '' }}>New</option>
-                                        <option value="processing" {{ old('order_status', $order->order_status) == 'processing' ? 'selected' : '' }}>Processing</option>
+                                        <option value="process" {{ old('order_status', $order->order_status) == 'process' ? 'selected' : '' }}>Process</option>
                                         <option value="completed" {{ old('order_status', $order->order_status) == 'completed' ? 'selected' : '' }}>Completed</option>
                                         <option value="cancelled" {{ old('order_status', $order->order_status) == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
                                     </select>

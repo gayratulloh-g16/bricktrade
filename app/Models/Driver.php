@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Driver extends Model
 {
     protected $fillable = [
-        'first_name',
-        'last_name',
-        'phone_number',
+        'user_id',
         'vehicle_number',
+        'latitude',
+        'longitude',
     ];
 
     /**
@@ -19,5 +19,10 @@ class Driver extends Model
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

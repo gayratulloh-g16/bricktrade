@@ -73,6 +73,11 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
+    public function drivers()
+    {
+        return $this->hasMany(Driver::class);
+    }
+
     /**
      * A user can leave many feedbacks.
      */

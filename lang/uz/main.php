@@ -42,7 +42,7 @@ return [
     'have_some_questions'         => 'Savollaringiz bormi?',
     'contact_form_description'    => 'Xizmatlarimizga qiziqishingiz uchun rahmat. Iltimos, quyidagi shaklni to‘ldiring yoki berilgan manzilga elektron pochta yuboring, biz esa iloji boricha tezroq siz bilan bog‘lanamiz.',
     'multi_engineering_solutions' => 'Ko‘p qirrali muhandislik yechimlari',
-    'construction_since'          => '2005 yildan beri janubi-markaziy qurilish hududi',
+    'construction_since'          => '2009 yildan beri janubi-markaziy qurilish hududi',
     'more_about_us'               => 'Biz haqimizda batafsil',
     'request_for_quote'           => 'Taklif uchun so‘rovnoma',
     'quote_description'           => 'Xavfsizlik uchun eng yaxshi asbob-uskunalar va materiallar',
@@ -106,7 +106,7 @@ return [
     'cart_totals'                    => 'Savdo jami',
     'shipping_and_handling'          => "Yetkazib berish va xizmatlar",
     'free_shipping'                  => "Bepul yetkazib berish",
-    'you_must_be_logged_in_to_proceed_to_checkout' => 'Checkout ga o‘tish uchun tizimga kirishingiz kerak.',
+    'you_must_be_logged_in_to_proceed_to_checkout' => 'Buyurtma berish uchun tizimga kirishingiz kerak.',
     'click_here_to_login'            => "Kirish uchun shu yerga bosing.",
     'shopping_cart'                  => "Savat",
     'cart'                           => 'Savat',
@@ -118,7 +118,7 @@ return [
     'apply_coupon'                   => 'Kuponni qo‘llash',
     'in_stock'                       => 'Mavjud',
     'out_of_stock'                   => 'Mavjud emas',
-    'proceed_to_checkout'            => 'Checkout ga o‘tish',
+    'proceed_to_checkout'            => 'Buyurtma berish',
     'order_success_message'          => 'Buyurtmangiz muvaffaqiyatli berildi. Iltimos, quyidagi buyurtma tafsilotlarini tekshiring:',
     'shop_detail'                    => 'Do‘kon tafsilotlari',
     'expected_delivery'              => "Kutilayotgan yetkazib berish 4-10 kun ichida",
@@ -142,7 +142,7 @@ return [
 
     // Section Title and Description
     'our_bricks_title'   => 'Bizning <span>G\'ishtlarimiz</span>',
-    'our_bricks_subtext' => '2005 yildan beri mustahkam qurilish uchun ishlab chiqarilgan yuqori sifatli g\'ishtlar',
+    'our_bricks_subtext' => '2009 yildan beri mustahkam qurilish uchun ishlab chiqarilgan yuqori sifatli g\'ishtlar',
 
     // Service Blocks
     'service_superior_quality_title'    => 'A\'lo Sifat',
@@ -169,13 +169,13 @@ return [
     'service_expert_guidance_title'       => 'Mutaxassislar Maslahati',
     'service_expert_guidance_text'        => 'Jamoamiz loyiha rejalashtirishdan tortib, o\'rnatishga qadar mutaxassislar maslahatlari bilan sizni qo\'llab-quvvatlashga tayyor.',
     'video_section_title'   => 'Orzuingizni Qurish<br> Bizning Sifatli G\'ishtlar Bilan',
-    'video_section_text'    => '2005 yildan beri ishonchli g\'isht ishlab chiqarish va qurilishdagi mukammallik',
+    'video_section_text'    => '2009 yildan beri ishonchli g\'isht ishlab chiqarish va qurilishdagi mukammallik',
     'video_section_video_url' => 'https://www.youtube.com/watch?v=9pjF7gD7fwY',
     'clients_section_title'   => 'Bizda Eng Zo‘r <br> Korporativ Hamkorlar Bor',
     'clients_section_text'    => 'Biz jamoatchilik sektori bilan birgalikda farovon jamoalarni quramiz.',
     // Solution Section
     'solution_title'                    => 'Innovatsion G\'isht Ishlab Chiqarish Yechimlari',
-    'solution_subtitle'                 => '2005 yildan beri bardoshli, barqaror g\'ishtlarni yetkazib berish',
+    'solution_subtitle'                 => '2009 yildan beri bardoshli, barqaror g\'ishtlarni yetkazib berish',
     'solution_button_text'              => 'Biz haqimizda ko\'proq',
 
     'solution_feature_quality_title'    => 'Qattiq Sifat Nazorati',
@@ -192,7 +192,7 @@ return [
 
     // Services Section Three
     'services_section_title'    => 'Biz nima <span>qilamiz</span>',
-    'services_section_text'     => '2005 yildan beri yuqori sifatli g\'isht yechimlarini taqdim etamiz',
+    'services_section_text'     => '2009 yildan beri yuqori sifatli g\'isht yechimlarini taqdim etamiz',
 
     'service_residential_title' => 'Yashash joylari uchun g\'isht ishlar',
     'service_residential_text'  => 'Uyingizni mustahkam va zamonaviy g\'ishtlarimiz bilan yanada chiroyli qiling.',
@@ -228,13 +228,13 @@ return [
     'faq_feature_4' => 'Samarali Yetkazib Berish',
 
     'shop_section_title' => 'Bizning Kompaniya <span>do\'koni</span>',
-    'shop_section_text'  => '2005 yildan beri janubi markaziy qurilish hududi',
+    'shop_section_text'  => '2009 yildan beri janubi markaziy qurilish hududi',
 
     'testimonial_section_title' => 'Eng katta narsa biz <br /><span>ishonchni quramiz.</span>',
-    'testimonial_section_text'  => '2005 yildan beri janubi markaziy qurilish hududi',
+    'testimonial_section_text'  => '2009 yildan beri janubi markaziy qurilish hududi',
 
     'news_section_title' => 'Bizning Blog <span>Tahlili</span>',
-    'news_section_text'  => '2005 yildan beri janubi markaziy qurilish hududi',
+    'news_section_text'  => '2009 yildan beri janubi markaziy qurilish hududi',
     'view_all_posts'     => 'Barcha maqolalarni ko\'rish',
     'comments'           => 'Sharhlar',
 
@@ -247,11 +247,11 @@ return [
     // Main Slider Section (Brick Industry)
     'main_slider_slide1_title'    => 'Sifatli g\'ishtlar bilan qurish',
     'main_slider_slide1_subtitle' => 'Premium g\'ishtlar bilan bardoshli tuzilmalarni yaratish',
-    'main_slider_slide1_text'     => 'Bizning g\'isht yechimlarimiz yuqori bardoshlik, energiya tejash va estetik go\'zallikni ta\'minlaydi. 2005 yildan beri mutaxassislar hunarmandchiligi bilan orzularni haqiqatga aylantiramiz.',
+    'main_slider_slide1_text'     => 'Bizning g\'isht yechimlarimiz yuqori bardoshlik, energiya tejash va estetik go\'zallikni ta\'minlaydi. 2009 yildan beri mutaxassislar hunarmandchiligi bilan orzularni haqiqatga aylantiramiz.',
 
     'main_slider_slide2_title'    => 'Innovatsion g\'isht texnologiyasi',
     'main_slider_slide2_subtitle' => 'Har bir g\'ishtda muhandislik mukammalligi',
-    'main_slider_slide2_text'     => 'Zamonaviy ishlab chiqarish jarayonlarimiz aniqlik va barqarorlikni ta\'minlaydi, shu bilan biz 2005 yildan beri g\'isht sanoatida yetakchi bo\'lib kelmoqdamiz.',
+    'main_slider_slide2_text'     => 'Zamonaviy ishlab chiqarish jarayonlarimiz aniqlik va barqarorlikni ta\'minlaydi, shu bilan biz 2009 yildan beri g\'isht sanoatida yetakchi bo\'lib kelmoqdamiz.',
 
     'main_slider_slide3_title'    => 'G\'isht mukammalligida dizayn',
     'main_slider_slide3_subtitle' => 'Arxitektura orzularingizni hayotga tatbiq etish',
@@ -260,5 +260,5 @@ return [
     'main_slider_button'          => 'Taklif Olish',
     'footer_industry_text' => 'Biz yuqori sifatli g\'ishtlar bilan kelajakni quramiz, innovatsiya va an\'anaviy hunarmandchilikni uyg\'unlashtirib, barqaror qiymat yaratamiz.',
 
-
+    'checkout' => 'Buyurtma berish'
 ];

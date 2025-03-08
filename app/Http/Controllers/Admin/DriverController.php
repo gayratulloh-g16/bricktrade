@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreDriverRequest;
 use App\Http\Requests\UpdateDriverRequest;
+use App\Models\User;
 use App\Models\Driver;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class DriverController extends Controller
@@ -15,30 +17,13 @@ class DriverController extends Controller
      */
     public function index(Request $request)
     {
+        // For admin, list all drivers
         $drivers = Driver::orderBy('created_at', 'desc')->paginate(10);
         return view('admin.drivers.index', compact('drivers'));
     }
 
     /**
-     * Real-time filter function for drivers.
-     */
-    public function filter(Request $request)
-    {
-        $search = $request->input('search', '');
-
-        $drivers = Driver::where(function ($query) use ($search) {
-            $query->where('first_name', 'like', "%{$search}%")
-                  ->orWhere('last_name', 'like', "%{$search}%")
-                  ->orWhere('phone_number', 'like', "%{$search}%")
-                  ->orWhere('vehicle_number', 'like', "%{$search}%");
-        })->orderBy('created_at', 'desc')->paginate(10);
-
-        // Return the partial view for dynamic updates.
-        return view('admin.drivers.partials.driver_list', compact('drivers'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new driver (registration for driver role).
      */
     public function create()
     {
@@ -46,18 +31,42 @@ class DriverController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created driver (and corresponding user) in storage.
      */
     public function store(StoreDriverRequest $request)
     {
-        Driver::create($request->validated());
+        $data = $request->validated();
+
+        // Create the user with role 'driver'
+        $user = User::create([
+            'first_name'    => $data['first_name'],
+            'last_name'     => $data['last_name'],
+            'email'         => $data['email'],
+            'password'      => Hash::make($data['password']),
+            'phone_number'  => $data['phone_number'], // optional: if needed in user table
+            'address'       => $data['address'] ?? null,
+            'city'          => $data['city'] ?? null,
+            'role'          => 'driver',
+            // 'image' field can be handled separately if desired.
+        ]);
+
+        // Create the driver record linked to this user
+        Driver::create([
+            'user_id'         => $user->id,
+            'phone_number'    => $data['phone_number'],
+            'vehicle_number'  => $data['vehicle_number'],
+            'latitude'        => $data['latitude'] ?? null,
+            'longitude'       => $data['longitude'] ?? null,
+        ]);
+
+
 
         return redirect()->route('admin.drivers.index')
-                         ->with('success', 'Driver created successfully.');
+            ->with('success', 'Driver registered successfully.');
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified driver.
      */
     public function show(Driver $driver)
     {
@@ -65,7 +74,7 @@ class DriverController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified driver.
      */
     public function edit(Driver $driver)
     {
@@ -73,24 +82,53 @@ class DriverController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified driver record.
      */
     public function update(UpdateDriverRequest $request, Driver $driver)
     {
-        $driver->update($request->validated());
+        $data = $request->validated();
+
+        // Prepare user update data.
+        $userData = [
+            'first_name'   => $data['first_name'],
+            'last_name'    => $data['last_name'],
+            'email'        => $data['email'],
+            'phone_number' => $data['phone_number'],
+            'address'      => $data['address'] ?? null,
+            'city'         => $data['city'] ?? null,
+        ];
+
+        // Update password only if provided.
+        if (!empty($data['password'])) {
+            $userData['password'] = Hash::make($data['password']);
+        }
+
+        // Update the associated user record.
+        $driver->user()->update($userData);
+
+        // Prepare driver update data.
+        $driverData = [
+            'phone_number'   => $data['phone_number'],  // You may store a copy here too.
+            'vehicle_number' => $data['vehicle_number'],
+            'latitude'       => $data['latitude'] ?? null,
+            'longitude'      => $data['longitude'] ?? null,
+        ];
+
+        // Update the driver record.
+        $driver->update($driverData);
 
         return redirect()->route('admin.drivers.index')
-                         ->with('success', 'Driver updated successfully.');
+            ->with('success', 'Driver updated successfully.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified driver from storage.
      */
     public function destroy(Driver $driver)
     {
         $driver->delete();
 
         return redirect()->route('admin.drivers.index')
-                         ->with('success', 'Driver deleted successfully.');
+            ->with('success', 'Driver deleted successfully.');
     }
 }
