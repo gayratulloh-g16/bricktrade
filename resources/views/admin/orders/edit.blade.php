@@ -77,7 +77,7 @@
                                     <select name="order_status" id="order_status" class="form-select" required>
                                         <option value="">Select Order Status</option>
                                         <option value="new" {{ old('order_status', $order->order_status) == 'new' ? 'selected' : '' }}>New</option>
-                                        <option value="process" {{ old('order_status', $order->order_status) == 'process' ? 'selected' : '' }}>Process</option>
+                                        <option value="processing" {{ old('order_status', $order->order_status) == 'processing' ? 'selected' : '' }}>Processing</option>
                                         <option value="completed" {{ old('order_status', $order->order_status) == 'completed' ? 'selected' : '' }}>Completed</option>
                                         <option value="cancelled" {{ old('order_status', $order->order_status) == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
                                     </select>

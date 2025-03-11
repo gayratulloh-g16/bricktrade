@@ -28,6 +28,7 @@ use App\Http\Controllers\Frontend\AuthController as FrontendAuthController;
 use App\Http\Controllers\Frontend\ContactController as FrontendContactController;
 use App\Http\Controllers\Frontend\CheckoutController as FrontendCheckoutController;
 use App\Http\Controllers\Frontend\FeedbackController as FrontendFeedbackController;
+use App\Models\Driver;
 
 /*
 |--------------------------------------------------------------------------
@@ -125,6 +126,14 @@ Route::get('reports/data', [AdminMainController::class, 'reportData'])->name('re
 Route::get('sales/recent', [AdminMainController::class, 'recent'])->name('sales.recent');
 Route::get('top-selling', [AdminMainController::class, 'topSelling'])->name('top-selling');
 Route::get('news/recent', [AdminMainController::class, 'recentNews'])->name('news.recent');
+
+Route::get('/driver-location/{driver_id}', function ($driver_id) {
+    $driver = Driver::find($driver_id);
+    return response()->json([
+        'latitude' => $driver->latitude,
+        'longitude' => $driver->longitude
+    ]);
+})->name('driver.location');
 
 
 Route::get('/{lang}', function ($lang) {

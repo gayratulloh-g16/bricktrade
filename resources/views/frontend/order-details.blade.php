@@ -84,15 +84,7 @@
                         </div>
                     </div>
 
-                    <!-- Driver Location Map -->
-                    @if ($order->driver->latitude && $order->driver->longitude)
-                        <div class="row mb-4">
-                            <div class="col-12">
-                                <h5>Driver Location</h5>
-                                <div id="driverMap" style="width: 100%; height: 300px; border: 1px solid #ddd; border-radius: 8px;"></div>
-                            </div>
-                        </div>
-                    @endif
+                    
                 @endif
 
                 <h5>{{ __('main.order_items') }}</h5>
@@ -208,31 +200,57 @@
         </div>
     </div>
 
-    <!-- Include Google Maps API if driver location map is needed -->
     @if($order->driver && $order->driver->latitude && $order->driver->longitude)
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVuUZoGEdvTXYp2ob1wQ5gVdvNqYZT1H4"></script>
-        <script>
-            function initDriverMap() {
-                var lat = parseFloat("{{ $order->driver->latitude }}");
-                var lng = parseFloat("{{ $order->driver->longitude }}");
-                var driverLocation = { lat: lat, lng: lng };
-                var map = new google.maps.Map(document.getElementById("driverMap"), {
-                    center: driverLocation,
-                    zoom: 14,
-                });
-                var marker = new google.maps.Marker({
-                    position: driverLocation,
-                    map: map,
-                    title: "Driver Location",
-                });
-            }
-            window.onload = initDriverMap;
-        </script>
-        <!-- Map Container -->
-        <div class="auto-container my-5">
-            <h5>Driver Live Location</h5>
-            <div id="driverMap" style="width: 100%; height: 300px; border: 1px solid #ddd; border-radius: 8px;"></div>
-        </div>
-    @endif
+    <!-- Include Yandex Maps API -->
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=eacdc7c8-4574-4461-978a-965d956be0a5&lang=en_US"></script>
+    <script>
+        let driverMap;
+        let driverPlacemark;
+        
+        ymaps.ready(initDriverMap);
+
+        function initDriverMap() {
+            var lat = parseFloat("{{ $order->driver->latitude }}");
+            var lng = parseFloat("{{ $order->driver->longitude }}");
+            var driverCoords = [lat, lng];
+            
+            driverMap = new ymaps.Map("driverMap", {
+                center: driverCoords,
+                zoom: 14
+            });
+            
+            driverPlacemark = new ymaps.Placemark(driverCoords, {
+                hintContent: "Driver Location",
+                balloonContent: "Driver's Current Position"
+            }, {
+                preset: "islands#blueCircleDotIcon"
+            });
+            
+            driverMap.geoObjects.add(driverPlacemark);
+            startUpdatingDriverLocation();
+        }
+        
+        function startUpdatingDriverLocation() {
+            setInterval(() => {
+                fetch("{{ route('driver.location', ['driver_id' => $order->driver->id]) }}")
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.latitude && data.longitude) {
+                            let newCoords = [parseFloat(data.latitude), parseFloat(data.longitude)];
+                            driverPlacemark.geometry.setCoordinates(newCoords);
+                            driverMap.setCenter(newCoords, 14);
+                        }
+                    })
+                    .catch(error => console.error("Error fetching driver location:", error));
+            }, 10000); // Update every 10 seconds
+        }
+    </script>
+    <!-- Map Container -->
+    <div class="auto-container my-5">
+        <h5>Driver Live Location</h5>
+        <div id="driverMap" style="width: 100%; height: 300px; border: 1px solid #ddd; border-radius: 8px;"></div>
+    </div>
+@endif
+
 
 </x-layouts.frontend>
