@@ -89,7 +89,7 @@
                                             <i class="bi bi-currency-dollar"></i>
                                         </div>
                                         <div class="ps-3">
-                                            <h5 id="revenueAmount" style="color: coral"></h5>
+                                            <h5 id="revenueAmount" style="color: black"></h5>
                                             <span class="text-success small pt-1 fw-bold" id="revenuePercent">8%</span>
                                             <span class="text-muted small pt-2 ps-1" id="revenueTrend">increase</span>
                                         </div>

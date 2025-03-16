@@ -22,51 +22,69 @@
                 <form method="post" action="{{ route('checkout.process') }}">
                     @csrf
                     <div class="row clearfix">
-                        <!-- Billing Address Column (Essential Fields Only) -->
+                        <!-- Left Column: Personal Information -->
                         <div class="column col-md-6 col-sm-12 col-xs-12">
                             <div class="checkout-title">
-                                <h4>{{__('main.order_information')}}</h4>
+                                <h4>{{ __('main.order_information') }}</h4>
                             </div>
                             <div class="row clearfix">
                                 <!-- First Name -->
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                    <div class="field-label">{{__('main.first_name')}} <sup>*</sup></div>
+                                    <div class="field-label">{{ __('main.first_name') }} <sup>*</sup></div>
                                     <input type="text" name="first_name" value="{{ old('first_name', Auth::user()->first_name) }}" placeholder="">
                                 </div>
                                 <!-- Last Name -->
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                    <div class="field-label">{{__('main.last_name')}} <sup>*</sup></div>
+                                    <div class="field-label">{{ __('main.last_name') }} <sup>*</sup></div>
                                     <input type="text" name="last_name" value="{{ old('last_name', Auth::user()->last_name) }}" placeholder="">
                                 </div>
                                 <!-- Email -->
                                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                                    <div class="field-label">{{__('main.email')}} <sup>*</sup></div>
+                                    <div class="field-label">{{ __('main.email') }} <sup>*</sup></div>
                                     <input type="email" name="email" value="{{ old('email', Auth::user()->email) }}" placeholder="Email Address">
                                 </div>
                                 <!-- Phone Number -->
                                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                    <div class="field-label">{{ __('main.phone_number') }} <sup>*</sup></div>
                                     <input type="text" name="phone" value="{{ old('phone', Auth::user()->phone_number) }}" placeholder="Phone Number">
                                 </div>
+                            </div>
+                        </div>
+                
+                        <!-- Right Column: Address Details & Map -->
+                        <div class="column col-md-6 col-sm-12 col-xs-12">
+                            <div class="checkout-title">
+                                <h4>{{ __('main.shipping_details') }}</h4>
+                            </div>
+                            <div class="row clearfix">
                                 <!-- Address -->
                                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                                    <div class="field-label">{{__('main.shipping_address')}} <sup>*</sup></div>
+                                    <div class="field-label">{{ __('main.shipping_address') }} <sup>*</sup></div>
                                     <input type="text" name="address" value="{{ old('address', Auth::user()->address) }}" placeholder="">
                                 </div>
                                 <!-- Town/City -->
                                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                                    <div class="field-label">{{__('main.city')}}<sup>*</sup></div>
+                                    <div class="field-label">{{ __('main.city') }} <sup>*</sup></div>
                                     <input type="text" name="city" value="{{ old('city', Auth::user()->city) }}" placeholder="">
                                 </div>
+                                <!-- Map Container -->
+                                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                    <div id="map" style="height: 300px;"></div>
+                                </div>
+                                <!-- Hidden fields for latitude and longitude -->
+                                <input type="hidden" name="latitude" id="latitude">
+                                <input type="hidden" name="longitude" id="longitude">
                             </div>
                         </div>
-                        <!-- (Optional) You can add more columns if needed -->
                     </div>
-                    <div class="clearfix">
+                
+                    <div class="clearfix text-center">
                         <button type="submit" class="theme-btn btn-style-three">
-                            <span class="txt">{{__('main.place_order')}}</span>
+                            <span class="txt">{{ __('main.place_order') }}</span>
                         </button>
                     </div>
                 </form>
+                
             </div>
             <!-- End Checkout Details -->
 
@@ -160,4 +178,40 @@
             </div>
         </div>
     @endif
+
+    <!-- Add Leaflet CSS and JS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var map = L.map('map').setView([41.2995, 69.2401], 12); // Default: Tashkent
+
+        // Load OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        var marker;
+
+        // Add click event to select location
+        map.on('click', function(e) {
+            var lat = e.latlng.lat;
+            var lng = e.latlng.lng;
+
+            // Remove existing marker
+            if (marker) {
+                map.removeLayer(marker);
+            }
+
+            // Add marker at clicked position
+            marker = L.marker([lat, lng]).addTo(map);
+
+            // Update hidden fields
+            document.getElementById('latitude').value = lat;
+            document.getElementById('longitude').value = lng;
+        });
+    });
+</script>
+
 </x-layouts.frontend>

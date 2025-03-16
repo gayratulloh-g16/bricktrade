@@ -19,7 +19,7 @@
             <div class="card">
               <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h5 class="card-title">Categories Data</h5>
+                  <h5 class="card-title">Blog Categories</h5>
                   <a href="{{ route('admin.categories.create') }}" class="btn btn-primary">Create New Category</a>
                 </div>
   

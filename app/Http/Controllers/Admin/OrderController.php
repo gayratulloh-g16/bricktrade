@@ -6,8 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Brick;
+use App\Models\Driver;
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -119,44 +122,54 @@ class OrderController extends Controller
     public function update(UpdateOrderRequest $request, Order $order)
     {
         $data = $request->validated();
-
-        // Remember old status
+    
+        // Remember old status and driver
         $oldStatus = $order->order_status;
-
+        $oldDriverId = $order->driver_id;
+    
         // Update order record
         $order->update([
-            'user_id'         => $data['user_id'],
-            'driver_id'       => $data['driver_id'],
-            'order_date'      => $data['order_date'],
-            'total_amount'    => $data['total_amount'],
-            'order_status'    => $data['order_status'],
+            'user_id'          => $data['user_id'],
+            'driver_id'        => $data['driver_id'],
+            'order_date'       => $data['order_date'],
+            'total_amount'     => $data['total_amount'],
+            'order_status'     => $data['order_status'],
             'shipping_address' => $data['shipping_address'],
         ]);
-
+    
         // Delete existing order items
         $order->orderItems()->delete();
-
+    
         // Re-create order items
         if (!empty($data['order_items']) && is_array($data['order_items'])) {
             foreach ($data['order_items'] as $item) {
                 $orderItem = $order->orderItems()->create($item);
-
-                // If the order's old status was "new" and it is now changed to something else,
-                // then decrease the brick's residual quantity.
+    
+                // Decrease brick residual if order was "new" and changed
                 if ($oldStatus === 'new' && $order->order_status !== 'new') {
                     $brick = \App\Models\Brick::find($item['brick_id']);
                     if ($brick) {
-                        // Decrease the residual by the order item quantity
-                        $brick->residual = $brick->residual - $item['quantity'];
+                        $brick->residual -= $item['quantity'];
                         $brick->save();
                     }
                 }
             }
         }
-
+    
+        // Notify Driver if Assigned
+        if (!empty($data['driver_id']) && $data['driver_id'] != $oldDriverId) {
+            $driver = Driver::find($data['driver_id']);
+            $user = User::where('id', $driver->user_id)->first();
+            if ($user) {
+                $user->notify(new \App\Notifications\DriverAssigned($order));
+            }
+        }
+    
         return redirect()->route('admin.orders.index')
             ->with('success', 'Order updated successfully.');
     }
+    
+    
 
 
 

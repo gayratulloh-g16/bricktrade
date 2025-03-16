@@ -7,7 +7,9 @@ use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
 use App\Models\Blog;
 use App\Models\Comment;
+use App\Notifications\NewCommentNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -30,9 +32,9 @@ class CommentController extends Controller
 
         $comments = Comment::where(function ($query) use ($search) {
             $query->where('first_name', 'like', "%{$search}%")
-                  ->orWhere('last_name', 'like', "%{$search}%")
-                  ->orWhere('email', 'like', "%{$search}%")
-                  ->orWhere('comment', 'like', "%{$search}%");
+                ->orWhere('last_name', 'like', "%{$search}%")
+                ->orWhere('email', 'like', "%{$search}%")
+                ->orWhere('comment', 'like', "%{$search}%");
         })->orderBy('created_at', 'desc')->paginate(10);
 
         // Return a partial view with the filtered comments.
@@ -56,7 +58,7 @@ class CommentController extends Controller
         Comment::create($request->validated());
 
         return redirect()->route('admin.comments.index')
-                         ->with('success', 'Comment created successfully.');
+            ->with('success', 'Comment created successfully.');
     }
 
     /**
@@ -64,6 +66,19 @@ class CommentController extends Controller
      */
     public function show(Comment $comment)
     {
+        $user = Auth::user();
+
+
+        // Find the notification related to this comment
+        $notification = $user->notifications()
+            ->where('type', NewCommentNotification::class) // Replace with your actual notification class
+            ->whereJsonContains('data->comment_id', $comment->id)
+            ->first();
+
+        // If a matching notification exists, mark it as read
+        if ($notification) {
+            $notification->markAsRead();
+        }
         return view('admin.comments.show', compact('comment'));
     }
 
@@ -84,7 +99,7 @@ class CommentController extends Controller
         $comment->update($request->validated());
 
         return redirect()->route('admin.comments.index')
-                         ->with('success', 'Comment updated successfully.');
+            ->with('success', 'Comment updated successfully.');
     }
 
     /**
@@ -95,6 +110,6 @@ class CommentController extends Controller
         $comment->delete();
 
         return redirect()->route('admin.comments.index')
-                         ->with('success', 'Comment deleted successfully.');
+            ->with('success', 'Comment deleted successfully.');
     }
 }

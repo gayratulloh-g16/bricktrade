@@ -43,7 +43,7 @@ return [
     'have_some_questions'         => 'Have Some Questions?',
     'contact_form_description'    => 'Thank you for your interest in our services. Please fill out the form below or email us at the given address and we will get back to you promptly regarding your request.',
     'multi_engineering_solutions' => 'Multi-Disciplined Engineering Solutions',
-    'construction_since'          => 'South-central construction region since 2009',
+    'construction_since'          => 'Central-Asia construction region since 2009',
     'more_about_us'               => 'More About Us',
     'request_for_quote'      => 'Request For Quote',
     'quote_description'      => 'Best Tools & Materials Used For Safe',
@@ -124,7 +124,7 @@ return [
     'order_success_message' => 'Your order has been placed successfully. Please review your order details below:',
     'shop_detail' => 'Shop Detail',
     'expected_delivery' => "Expected Delivery in 4-10 Days",
-    'description' => 'Description',
+    'description1' => 'Description',
     'useful_links' => "Useful Links",
     'update_profile' => "Update Profile",
     'update_my_profile' => "Update My Profile",
@@ -232,13 +232,13 @@ return [
     'faq_feature_4' => 'Efficient Delivery',
 
     'shop_section_title' => 'Our Company <span>shop</span>',
-    'shop_section_text'  => 'South-central construction region since 2009',
+    'shop_section_text'  => 'Central-Asia construction region since 2009',
 
     'testimonial_section_title' => 'The biggest thing we <br /><span>build is trust.</span>',
-    'testimonial_section_text'  => 'South-central construction region since 2009',
+    'testimonial_section_text'  => 'Central-Asia construction region since 2009',
 
     'news_section_title' => 'Our Blog <span>Insight</span>',
-    'news_section_text'  => 'South-central construction region since 2009',
+    'news_section_text'  => 'Central-Asia construction region since 2009',
     'view_all_posts'     => 'View All Posts',
     'comments'           => 'comments',
 
@@ -264,5 +264,38 @@ return [
     'main_slider_button'          => 'Get A Quote',
 
     'footer_industry_text' => 'We build the future with high-quality bricks, combining innovation with traditional craftsmanship to deliver lasting value.',
+
+    'title' => 'Building & Construction Company',
+    'heading' => 'We Build Construction Materials of Innovation',
+    'description' => 'Standard Brick Factory is a leading manufacturer specializing in 
+        the production of high-quality bricks for the construction industry. 
+        Established in 2009, the factory is located in Andijan, Uzbekistan and 
+        was founded by Rakhmonov Nabijon, who drew inspiration from his father\'s 
+        traditional clay brick-making trade. With a commitment to modernization and 
+        efficiency, the factory quickly grew from small-scale manual production to a 
+        fully automated process, enabling a significant increase in output and quality.',
+    
+    'complete_projects' => 'Complete Project',
+    'company_followers' => 'Company Followers',
+    'more_about_us' => 'More About Us',
+
+    'construction_region' => 'Central-Asia construction region since 2009',
+    'comfortable_joining' => 'Comfortable :span joining :br in one open space.',
+    'company_description' => 'Standard Brick Factory is a leading manufacturer specializing in the production of 
+        high-quality bricks for the construction industry. Established in 2009, the factory is 
+        located in Andijan, Uzbekistan and was founded by Rakhmonov Nabijon, who drew inspiration 
+        from his father\'s traditional clay brick-making trade. With a commitment to modernization 
+        and efficiency, the factory quickly grew from small-scale manual production to a fully 
+        automated process, enabling a significant increase in output and quality.',
+    'complete_project' => 'Complete Project',
+    'company_followers' => 'Company Followers',
+    'more_about_us' => 'More About Us',
+
+    'select_option' => 'Other Company Price',
+    'price_suffix' => 'so\'m',
+
+    'cancel_order' => 'Bekor qilish',
+    'confirm_cancel' => 'Buyurtmani bekor qilishni tasdiqlaysizmi?',
+    'order_cancelled' => 'Buyurtma muvaffaqiyatli bekor qilindi.',
 
 ];

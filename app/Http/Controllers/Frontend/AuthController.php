@@ -22,19 +22,25 @@ class AuthController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required', 'min:8']
         ]);
-
+    
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-
+    
             if ($user->isCustomer()) {
                 return redirect()->route('home');
+            } elseif ($user->isAdmin()) {
+                return redirect()->route('admin.dashboard');
+            } elseif ($user->isDriver()) {
+                return redirect()->route('driver.dashboard');
             }
-
+    
             Auth::logout();
             return back()->withErrors(['email' => 'Unauthorized access.']);
         }
+    
         return back()->withErrors(['email' => 'Invalid credentials.']);
     }
+    
 
     public function showRegistrationForm()
     {

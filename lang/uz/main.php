@@ -42,7 +42,7 @@ return [
     'have_some_questions'         => 'Savollaringiz bormi?',
     'contact_form_description'    => 'Xizmatlarimizga qiziqishingiz uchun rahmat. Iltimos, quyidagi shaklni to‘ldiring yoki berilgan manzilga elektron pochta yuboring, biz esa iloji boricha tezroq siz bilan bog‘lanamiz.',
     'multi_engineering_solutions' => 'Ko‘p qirrali muhandislik yechimlari',
-    'construction_since'          => '2009 yildan beri janubi-markaziy qurilish hududi',
+    'construction_since'          => '2009 yildan beri Markaziy Osiyo qurilish hududi',
     'more_about_us'               => 'Biz haqimizda batafsil',
     'request_for_quote'           => 'Taklif uchun so‘rovnoma',
     'quote_description'           => 'Xavfsizlik uchun eng yaxshi asbob-uskunalar va materiallar',
@@ -122,7 +122,7 @@ return [
     'order_success_message'          => 'Buyurtmangiz muvaffaqiyatli berildi. Iltimos, quyidagi buyurtma tafsilotlarini tekshiring:',
     'shop_detail'                    => 'Do‘kon tafsilotlari',
     'expected_delivery'              => "Kutilayotgan yetkazib berish 4-10 kun ichida",
-    'description'                    => 'Tavsif',
+    'description1'                    => 'Tavsif',
     'useful_links'                   => "Foydali havolalar",
     'update_profile'      => 'Profilni yangilash',
     'update_my_profile'   => 'Profilimni yangilash',
@@ -260,5 +260,29 @@ return [
     'main_slider_button'          => 'Taklif Olish',
     'footer_industry_text' => 'Biz yuqori sifatli g\'ishtlar bilan kelajakni quramiz, innovatsiya va an\'anaviy hunarmandchilikni uyg\'unlashtirib, barqaror qiymat yaratamiz.',
 
-    'checkout' => 'Buyurtma berish'
+    'checkout' => 'Buyurtma berish',
+    'title' => 'Qurilish va Inshoot Kompaniyasi',
+    'heading' => 'Biz Innovatsion Qurilish Materiallarini Ishlab Chiqaramiz',
+    'description' => 'Standard Brick Factory – qurilish sanoati uchun yuqori sifatli 
+        g‘ishtlar ishlab chiqarishga ixtisoslashgan yetakchi ishlab chiqaruvchi. 
+        2009-yilda tashkil etilgan ushbu zavod O‘zbekistonda, Andijon shahrida joylashgan 
+        bo‘lib, uni Raxmonov Nabijon asos solgan. U otasining an’anaviy loy g‘isht ishlab 
+        chiqarish hunaridan ilhomlanib, zamonaviy texnologiyalarni joriy etish orqali 
+        ishlab chiqarishni avtomatlashtirishga muvaffaq bo‘ldi.',
+
+    'complete_projects' => 'Tugallangan Loyihalar',
+    'company_followers' => 'Kompaniya Kuzatuvchilari',
+    'more_about_us' => 'Biz Haqimizda Ko‘proq',
+    'construction_region' => 'Markaziy Osiyo qurilish mintaqasi 2009 yildan beri',
+    'comfortable_joining' => 'Bitta ochiq makonda qulay :span qo\'shilish :br.',
+    'company_description' => 'Standard Brick Factory qurilish sanoati uchun yuqori sifatli gʻishtlar ishlab chiqarishga ixtisoslashgan yetakchi ishlab chiqaruvchi hisoblanadi.
+        2009 yilda tashkil etilgan bu zavod Andijonda joylashgan bo\'lib, uning asoschisi Rakhmonov Nabijon bo\'lgan. 
+        U otasining an’anaviy loy gʻisht ishlab chiqarish hunaridan ilhomlangan. 
+        Modernizatsiya va samaradorlikka bo\'lgan sadoqat tufayli, zavod kichik hajmli qo\'l mehnatidan to\'liq avtomatlashtirilgan jarayonga o\'tib, 
+        ishlab chiqarish hajmi va sifatini sezilarli darajada oshirdi.',
+    'complete_project' => 'Tugatilingan loyihalar',
+    'company_followers' => 'Kompaniya obunachilari',
+    'more_about_us' => 'Biz haqimizda batafsil',
+    'select_option' => 'Boshqa Kompaniya Narxi',
+    'price_suffix' => 'so\'m',
 ];

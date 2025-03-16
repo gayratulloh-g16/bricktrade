@@ -1,7 +1,10 @@
 <?php
 use App\Models\ContactInfo;
+use App\Models\Company;
 
 $contact = ContactInfo::first();
+$companies = Company::orderBy('id', 'desc')->get();
+
 ?>
 <!-- Header Style One / Three -->
 <header class="main-header header-style-three">
@@ -10,12 +13,26 @@ $contact = ContactInfo::first();
         <div class="auto-container">
             <div class="inner-container clearfix">
                 <!-- Top Left -->
-                <div class="top-left clearfix">
-                    <div class="button-box">
-                        <a class="theme-btn contact-btn" href="contact.html">{{ __('main.brick_trade') }}</a>
+                <div class="top-left clearfix d-flex align-items-center">
+                    <div class="button-box me-3">
+                        <a class="theme-btn contact-btn" href="{{ route('contact') }}">{{ __('main.brick_trade') }}</a>
                     </div>
-                    <div class="text">{{ __('main.welcome_message') }}</div>
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-toggle" style="color:white; margin-left:10px" data-bs-toggle="dropdown">
+                            {{ __('main.select_option') }}
+                        </a>
+                        <ul class="dropdown-menu">
+                            @foreach ($companies as $company)
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        {{ $company->name }} - {{ $company->price }} {{ __('main.price_suffix') }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
+                
                 <!-- Top Right -->
                 <div class="top-right pull-right clearfix d-flex align-items-center justify-content-between">
                     <!-- User name with dropdown -->
@@ -46,11 +63,9 @@ $contact = ContactInfo::first();
                             <a href="https://www.facebook.com/" class="fab fa-facebook-f fa-2x"></a>
                         </li>
                         <li class="me-3">
-                            <a href="https://www.twitter.com/" class="fab fa-twitter fa-2x"></a>
+                            <a href="https://www.twitter.com/" class="fab fa-telegram fa-2x"></a>
                         </li>
-                        <li class="me-3">
-                            <a href="https://www.linkedin.com/" class="fab fa-linkedin fa-2x"></a>
-                        </li>
+                        
                         <li>
                             <a href="https://youtube.com/" class="fab fa-youtube fa-2x"></a>
                         </li>
@@ -191,7 +206,7 @@ $contact = ContactInfo::first();
         <div class="auto-container clearfix">
             <!--Logo-->
             <div class="logo pull-left">
-                <a href="index.html" title=""><img src="/frontend/assets/images/logo-small.png" alt=""
+                <a href="{{ route('home')}}" title=""><img src="/frontend/assets/images/logo-small.png" alt=""
                         title="" /></a>
             </div>
             <!--Right Col-->
@@ -257,7 +272,7 @@ $contact = ContactInfo::first();
 
         <nav class="menu-box">
             <div class="nav-logo">
-                <a href="index.html"><img src="/frontend/assets/images/logo-small.png" alt=""
+                <a href="{{ route('home')}}"><img src="/frontend/assets/images/logo-small.png" alt=""
                         title="" /></a>
             </div>
             <div class="menu-outer">

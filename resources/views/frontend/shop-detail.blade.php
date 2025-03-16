@@ -78,10 +78,10 @@
                                                 <span class="fa fa-star-half-empty"></span>
                                             </div>
                                             <div class="item-price">{{ $brick->price }} So'm</div>
+                                            <h5><strong>Bricks left:</strong> {{ $brick->residual }}</h5>
                                         </div>
 
-
-                                        <div class="expired">{{__('main.expected_delivery')}}</div>
+                                        <p>{{__('main.expected_delivery')}}</p>
                                         <div class="other-options clearfix">
                                             <div class="item-quantity">
                                                 <!-- You may use a jQuery spinner plugin here if desired -->
@@ -104,7 +104,7 @@
                                 <div class="prod-tabs tabs-box">
                                     <!--Tab Btns-->
                                     <ul class="tab-btns tab-buttons clearfix">
-                                        <li data-tab="#prod-details" class="tab-btn active-btn">{{__('main.description')}}</li>
+                                        <li data-tab="#prod-details" class="tab-btn active-btn">{{__('main.description1')}}</li>
                                         <li data-tab="#prod-reviews" class="tab-btn">{{ __('main.reviews') }} ({{ $brick->reviews->count() }})</li>
                                     </ul>
 

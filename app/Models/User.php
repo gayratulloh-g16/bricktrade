@@ -57,6 +57,14 @@ class User extends Authenticatable
     {
         return $this->role === 'customer';
     }
+
+    public function isAdmin(){
+        return $this->role === 'admin';
+    }
+
+    public function isDriver(){
+        return $this->role === 'driver';
+    }
     /**
      * A user can have many reviews.
      */

@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\FeedbackController as AdminFeedbackController;
 use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\CompanyController as AdminCompanyController;
 
 // driver routes
 use App\Http\Controllers\Driver\AuthController as DriverAuthController;
@@ -65,6 +66,8 @@ Route::middleware('auth')->group(function () {
     Route::put('profile/update', [FrontendAuthController::class, 'updateProfile'])->name('frontend.profile.update');
     Route::post('feedback', [FrontendFeedbackController::class, 'store'])->name('feedback.store');
 });
+Route::post('/orders/{id}/cancel', [FrontendCheckoutController::class, 'cancel'])->name('orders.cancel');
+
 
 // User Routes
 Route::get('/', [FrontendMainController::class, 'home'])->name('home');
@@ -102,8 +105,10 @@ Route::prefix('admin')->group(function () {
         Route::get('profile', [AdminMainController::class, 'profile'])->name('profile');
         Route::put('profile/update', [AdminMainController::class, 'updateProfile'])->name('profile.update');
         Route::resource('users', AdminUserController::class);
+        Route::resource('companies', AdminCompanyController::class);
     });
 });
+
 
 // driver route 
 Route::prefix('driver')->group(function () {

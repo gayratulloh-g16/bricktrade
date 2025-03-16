@@ -36,16 +36,17 @@
                             @php
                                 $status = $order->order_status;
                                 $colors = [
-                                    'new'        => '#007bff',  // blue
-                                    'processing' => '#fd7e14',  // orange
-                                    'completed'  => '#28a745',  // green
-                                    'cancelled'  => '#dc3545',  // red
+                                    'new' => '#007bff', // blue
+                                    'processing' => '#fd7e14', // orange
+                                    'completed' => '#28a745', // green
+                                    'cancelled' => '#dc3545', // red
                                 ];
                                 $color = $colors[$status] ?? '#6c757d'; // default grey
                             @endphp
                             <li>
                                 <strong>{{ __('main.status') }}:</strong>
-                                <span style="background-color: {{ $color }}; color: #fff; padding: 2px 8px; border-radius: 10px; font-size: 0.9rem;">
+                                <span
+                                    style="background-color: {{ $color }}; color: #fff; padding: 2px 8px; border-radius: 10px; font-size: 0.9rem;">
                                     {{ __('main.' . $status) }}
                                 </span>
                             </li>
@@ -55,11 +56,26 @@
                     <div class="col-md-6">
                         <h5>{{ __('main.shipping_address') }}</h5>
                         <p>{{ $order->shipping_address }}</p>
+                        @if ($order->order_status === 'new')
+                            <div class="text-end mt-3">
+                                <form action="{{ route('orders.cancel', $order->id) }}" method="POST"
+                                    style="display: inline;">
+                                    @csrf
+                                    @method('POST')
+                                    <button type="submit" class="btn btn-danger"
+                                        onclick="return confirm('{{ __('main.confirm_cancel') }}');">
+                                        {{ __('main.cancel_order') }}
+                                    </button>
+                                </form>
+                            </div>
+                        @endif
                         @if ($order->order_notes)
                             <h5>{{ __('main.order_notes') }}</h5>
                             <p>{{ $order->order_notes }}</p>
                         @endif
                     </div>
+
+
                 </div>
 
                 <!-- Driver Information -->
@@ -83,8 +99,6 @@
                             </ul>
                         </div>
                     </div>
-
-                    
                 @endif
 
                 <h5>{{ __('main.order_items') }}</h5>
@@ -121,21 +135,23 @@
                 <!-- Feedback Section (if order is completed) -->
                 @if ($order->order_status === 'completed')
                     @if ($order->feedback)
-                        <div class="feedback-display mt-4 p-3" style="border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
+                        <div class="feedback-display mt-4 p-3"
+                            style="border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
                             <h5 style="margin-bottom: 10px;">{{ __('main.your_review') }}</h5>
                             <div class="star-rating-display mb-2" style="font-size: 1.5rem;">
                                 @for ($i = 1; $i <= 5; $i++)
                                     @if ($i <= $order->feedback->rating)
                                         <i class="fa-solid fa-star" style="color: #f7c600;"></i>
                                     @else
-                                        <i class="fa-solid fa-star" style="color: #ccc;"></i>
+                                        <i class="fa-solid fa-star"></i>
                                     @endif
                                 @endfor
                             </div>
                             <p>{{ $order->feedback->text }}</p>
                         </div>
                     @else
-                        <div class="feedback-section mt-4" style="border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9; padding: 20px;">
+                        <div class="feedback-section mt-4"
+                            style="border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9; padding: 20px;">
                             <h5>{{ __('main.add_your_review') }}</h5>
                             <form action="{{ route('feedback.store') }}" method="POST">
                                 @csrf
@@ -143,30 +159,36 @@
                                 <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                                 <div class="rating-form mb-3">
                                     <p>{{ __('main.your_rating') }}</p>
-                                    <div class="star-rating" style="direction: rtl; font-size: 1.5rem; display: inline-flex;">
-                                        <input type="radio" id="star5" name="rating" value="5" required style="display: none;">
+                                    <div class="star-rating"
+                                        style="direction: rtl; font-size: 1.5rem; display: inline-flex;">
+                                        <input type="radio" id="star5" name="rating" value="5" required
+                                            style="display: none;">
                                         <label for="star5" title="5 stars" style="cursor: pointer;">
-                                            <i class="fa-solid fa-star" style="color: #ccc;"></i>
+                                            <i class="fa-solid fa-star"></i>
                                         </label>
 
-                                        <input type="radio" id="star4" name="rating" value="4" style="display: none;">
+                                        <input type="radio" id="star4" name="rating" value="4"
+                                            style="display: none;">
                                         <label for="star4" title="4 stars" style="cursor: pointer;">
-                                            <i class="fa-solid fa-star" style="color: #ccc;"></i>
+                                            <i class="fa-solid fa-star"></i>
                                         </label>
 
-                                        <input type="radio" id="star3" name="rating" value="3" style="display: none;">
+                                        <input type="radio" id="star3" name="rating" value="3"
+                                            style="display: none;">
                                         <label for="star3" title="3 stars" style="cursor: pointer;">
-                                            <i class="fa-solid fa-star" style="color: #ccc;"></i>
+                                            <i class="fa-solid fa-star"></i>
                                         </label>
 
-                                        <input type="radio" id="star2" name="rating" value="2" style="display: none;">
+                                        <input type="radio" id="star2" name="rating" value="2"
+                                            style="display: none;">
                                         <label for="star2" title="2 stars" style="cursor: pointer;">
-                                            <i class="fa-solid fa-star" style="color: #ccc;"></i>
+                                            <i class="fa-solid fa-star"></i>
                                         </label>
 
-                                        <input type="radio" id="star1" name="rating" value="1" style="display: none;">
+                                        <input type="radio" id="star1" name="rating" value="1"
+                                            style="display: none;">
                                         <label for="star1" title="1 star" style="cursor: pointer;">
-                                            <i class="fa-solid fa-star" style="color: #ccc;"></i>
+                                            <i class="fa-solid fa-star"></i>
                                         </label>
                                     </div>
                                 </div>
@@ -175,9 +197,10 @@
                                     .star-rating label {
                                         transition: color 0.2s;
                                     }
-                                    .star-rating input:checked ~ label,
+
+                                    .star-rating input:checked~label,
                                     .star-rating label:hover,
-                                    .star-rating label:hover ~ label {
+                                    .star-rating label:hover~label {
                                         color: #f7c600 !important;
                                     }
                                 </style>
@@ -185,9 +208,10 @@
                                 <div class="mb-3">
                                     <label for="text" class="form-label">{{ __('main.your_review') }}</label>
                                     <textarea name="text" id="text" rows="4" class="form-control"
-                                              placeholder="{{ __('main.review_placeholder') }}" required></textarea>
+                                        placeholder="{{ __('main.review_placeholder') }}" required></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-primary">{{ __('main.submit_review') }}</button>
+                                <button type="submit"
+                                    class="btn btn-primary">{{ __('main.submit_review') }}</button>
                             </form>
                         </div>
                     @endif
@@ -200,36 +224,82 @@
         </div>
     </div>
 
-    @if($order->driver && $order->driver->latitude && $order->driver->longitude)
+    @if ($order->driver && $order->driver->latitude && $order->driver->longitude && $order->latitude && $order->longitude)
     <!-- Include Yandex Maps API -->
     <script src="https://api-maps.yandex.ru/2.1/?apikey=eacdc7c8-4574-4461-978a-965d956be0a5&lang=en_US"></script>
     <script>
         let driverMap;
         let driverPlacemark;
-        
+        let orderPlacemark;
+        let route;
+
         ymaps.ready(initDriverMap);
 
         function initDriverMap() {
-            var lat = parseFloat("{{ $order->driver->latitude }}");
-            var lng = parseFloat("{{ $order->driver->longitude }}");
-            var driverCoords = [lat, lng];
-            
+            // Driver coordinates
+            let driverLat = parseFloat("{{ $order->driver->latitude }}");
+            let driverLng = parseFloat("{{ $order->driver->longitude }}");
+            let driverCoords = [driverLat, driverLng];
+
+            // Order coordinates
+            let orderLat = parseFloat("{{ $order->latitude }}");
+            let orderLng = parseFloat("{{ $order->longitude }}");
+            let orderCoords = [orderLat, orderLng];
+
+            // Initialize map, centered at driver
             driverMap = new ymaps.Map("driverMap", {
                 center: driverCoords,
                 zoom: 14
             });
-            
+
+            // Driver placemark
             driverPlacemark = new ymaps.Placemark(driverCoords, {
                 hintContent: "Driver Location",
                 balloonContent: "Driver's Current Position"
             }, {
                 preset: "islands#blueCircleDotIcon"
             });
-            
+
+            // Order placemark
+            orderPlacemark = new ymaps.Placemark(orderCoords, {
+                hintContent: "Order Location",
+                balloonContent: "Order's Delivery Address"
+            }, {
+                preset: "islands#redHomeIcon"
+            });
+
+            // Add placemarks to the map
             driverMap.geoObjects.add(driverPlacemark);
+            driverMap.geoObjects.add(orderPlacemark);
+
+            // Build the route
+            updateRoute(driverCoords, orderCoords);
+
+            // Start updating driver location
             startUpdatingDriverLocation();
         }
-        
+
+        function updateRoute(driverCoords, orderCoords) {
+            // Remove the existing route if it exists
+            if (route) {
+                driverMap.geoObjects.remove(route);
+            }
+
+            // Build a new driving route
+            ymaps.route([driverCoords, orderCoords], {
+                mapStateAutoApply: true,
+                routingMode: "auto" // Use "pedestrian" for walking routes
+            }).then(function (newRoute) {
+                route = newRoute;
+                route.getPaths().options.set({
+                    strokeColor: "#FF0000", // Red route
+                    strokeWidth: 5,
+                    opacity: 0.7
+                });
+                driverMap.geoObjects.add(route);
+            });
+        }
+
         function startUpdatingDriverLocation() {
             setInterval(() => {
                 fetch("{{ route('driver.location', ['driver_id' => $order->driver->id]) }}")
@@ -237,20 +307,28 @@
                     .then(data => {
                         if (data.latitude && data.longitude) {
                             let newCoords = [parseFloat(data.latitude), parseFloat(data.longitude)];
+                            
+                            // Update driver marker position
                             driverPlacemark.geometry.setCoordinates(newCoords);
-                            driverMap.setCenter(newCoords, 14);
+
+                            // Update the driving route
+                            updateRoute(newCoords, [parseFloat("{{ $order->latitude }}"), parseFloat("{{ $order->longitude }}")]);
                         }
                     })
                     .catch(error => console.error("Error fetching driver location:", error));
             }, 10000); // Update every 10 seconds
         }
     </script>
+
     <!-- Map Container -->
     <div class="auto-container my-5">
-        <h5>Driver Live Location</h5>
+        <h5>Driver & Order Route</h5>
         <div id="driverMap" style="width: 100%; height: 300px; border: 1px solid #ddd; border-radius: 8px;"></div>
     </div>
 @endif
+
+
+
 
 
 </x-layouts.frontend>

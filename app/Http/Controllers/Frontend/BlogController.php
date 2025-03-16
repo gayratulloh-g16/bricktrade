@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
+use App\Models\User;
+use App\Notifications\NewCommentNotification;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -19,6 +21,11 @@ class BlogController extends Controller
         ]);
 
         $comment = Comment::create($validated);
+
+        $admins = User::where('role', 'admin')->get();
+        foreach ($admins as $admin) {
+            $admin->notify(new NewCommentNotification($comment));
+        }
 
         $commentHtml = view('partials.comment', compact('comment'))->render();
 

@@ -27,37 +27,56 @@
                   @endphp
                   <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                       <i class="bi bi-bell"></i>
-                      <span class="badge bg-primary badge-number">{{ $newOrders->count() }} </span>
+                      <span class="badge bg-primary badge-number">{{ Auth::user()->unreadNotifications()->count() + $newOrders->count() }} </span>
                   </a><!-- End Notification Icon -->
 
+                  
 
                   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-                      <li class="dropdown-header">
-                          You have {{ $newOrders->count() }} new notifications
-                          {{-- <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a> --}}
-                      </li>
-                      <li>
-                          <hr class="dropdown-divider">
-                      </li>
-                      @foreach ($newOrders as $order)
-                          <a href="{{ route('admin.orders.edit', $order->id) }}">
-                              <li class="notification-item">
-                                  <i class="bi bi-info-circle text-primary"></i>
-                                  <div>
-                                      <h4>Order #{{ $order->id }}</h4>
-                                      <p>Shipping: {{ $order->shipping_address }}</p>
-                                      <p>{{ $order->created_at->diffForHumans() }}</p>
-                                  </div>
-                              </li>
-                              <li>
-                                  <hr class="dropdown-divider">
-                              </li>
-                          </a>
-                      @endforeach
-                      {{-- <li class="dropdown-footer">
-                          <a href="#">Show all notifications</a>
-                      </li> --}}
-                  </ul>
+                    <li class="dropdown-header d-flex justify-content-between align-items-center">
+                        
+                        <span>You have {{ Auth::user()->unreadNotifications()->count() + $newOrders->count() }} new notifications</span>
+                        <a href="#" class="text-primary small" onclick="markAllAsRead()">Mark all as read</a>
+                    </li>
+                    <li><hr class="dropdown-divider"></li>
+                
+                    {{-- New Comments --}}
+                    @foreach (Auth::user()->unreadNotifications as $notification)
+                        <li class="notification-item d-flex align-items-center">
+                            <i class="bi bi-chat-dots text-success fs-4 me-2"></i>
+                            <div class="flex-grow-1">
+                                <a href="{{ route('admin.comments.show', $notification->data['comment_id']) }}"
+                                   class="d-block text-dark fw-bold"
+                                   onclick="markAsRead('{{ $notification->id }}')">
+                                    New Comment for {{ $notification->data['blog_id'] }} blog
+                                </a>
+                                <small class="text-muted d-block">{{ Str::limit($notification->data['comment_text'], 50) }}</small>
+                                <small class="text-muted">{{ \Carbon\Carbon::parse($notification->created_at)->diffForHumans() }}</small>
+                            </div>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                    @endforeach
+                
+                    {{-- New Orders --}}
+                    @foreach ($newOrders as $order)
+                        <li class="notification-item d-flex align-items-center">
+                            <i class="bi bi-info-circle text-primary fs-4 me-2"></i>
+                            <div class="flex-grow-1">
+                                <a href="{{ route('admin.orders.edit', $order->id) }}" class="d-block text-dark fw-bold">
+                                    New Order #{{ $order->id }}
+                                </a>
+                                <small class="text-muted d-block">Shipping: {{ $order->shipping_address }}</small>
+                                <small class="text-muted">{{ $order->created_at->diffForHumans() }}</small>
+                            </div>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                    @endforeach
+                
+                    @if(Auth::user()->unreadNotifications->isEmpty() && $newOrders->isEmpty())
+                        <li class="text-center text-muted py-2">No new notifications</li>
+                    @endif
+                </ul>
+                
 
               </li><!-- End Notification Nav -->
 

@@ -12,14 +12,16 @@
                         <h1>{!! __('main.main_slider_slide1_subtitle') !!}</h1>
                         <div class="text">{{ __('main.main_slider_slide1_text') }}</div>
                         <div class="btns-box">
-                            <a class="btn-style-one theme-btn" href="about.html">
+                            <a class="btn-style-one theme-btn" href="{{ route('contact') }}">
                                 <span class="txt">{{ __('main.main_slider_button') }}</span>
                             </a>
                             <div class="play-box">
-                                <a href="https://www.youtube.com/watch?v=kxPCFljwJws" class="lightbox-image play-button">
+                                <a href="https://www.youtube.com/watch?v=-_PQ7J6TDMw" class="play-button" target="_blank" rel="noopener noreferrer">
                                     <span class="flaticon-play-arrow"><i class="ripple"></i></span>
                                 </a>
-                            </div>
+                            </div>                            
+                        
+                            
                         </div>
                     </div>
                 </div>
@@ -37,14 +39,17 @@
                         <h1>{!! __('main.main_slider_slide2_subtitle') !!}</h1>
                         <div class="text">{{ __('main.main_slider_slide2_text') }}</div>
                         <div class="btns-box">
-                            <a class="btn-style-one theme-btn" href="about.html">
+                            <a class="btn-style-one theme-btn" href="{{ route('contact')}}">
                                 <span class="txt">{{ __('main.main_slider_button') }}</span>
                             </a>
                             <div class="play-box">
-                                <a href="https://www.youtube.com/watch?v=kxPCFljwJws" class="lightbox-image play-button">
+                                <a href="https://www.youtube.com/watch?v=-_PQ7J6TDMw" class="play-button" target="_blank" rel="noopener noreferrer">
                                     <span class="flaticon-play-arrow"><i class="ripple"></i></span>
                                 </a>
                             </div>
+                            
+                            
+                            
                         </div>
                     </div>
                 </div>
@@ -62,14 +67,17 @@
                         <h1>{!! __('main.main_slider_slide3_subtitle') !!}</h1>
                         <div class="text">{{ __('main.main_slider_slide3_text') }}</div>
                         <div class="btns-box">
-                            <a class="btn-style-one theme-btn" href="about.html">
+                            <a class="btn-style-one theme-btn" href="{{ route('contact')}}">
                                 <span class="txt">{{ __('main.main_slider_button') }}</span>
                             </a>
                             <div class="play-box">
-                                <a href="https://www.youtube.com/watch?v=kxPCFljwJws" class="lightbox-image play-button">
+                                <a href="https://www.youtube.com/watch?v=-_PQ7J6TDMw" class="play-button" target="_blank" rel="noopener noreferrer">
                                     <span class="flaticon-play-arrow"><i class="ripple"></i></span>
                                 </a>
                             </div>
+                            
+                            
+                            
                         </div>
                     </div>
                 </div>
@@ -108,17 +116,10 @@
                 <!-- Content Column -->
                 <div class="content-column col-lg-6 col-md-12 col-sm-12">
                     <div class="inner-column">
-                        <div class="title">Building & Construction Company</div>
-                        <h2>We Build Constraction Matrials of Inovation</h2>
-                        <div class="text">
-                            USA Construction Company, Inc. was founded in 2003 and quickly
-                            established a reputation for top quality work. Throughout our
-                            history, one philosophy has remained Predominant, Total
-                            Quality Performance. Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit. Ut elit tellus, luctus nec ullamcorper
-                            mattis, pulvinar dapibus leo.
-                        </div>
-
+                        <div class="title">{{ __('main.title') }}</div>
+                        <h2>{{ __('main.heading') }}</h2>
+                        <div class="text">{{ __('main.description') }}</div>
+                
                         <!-- Fact Counter / Style Three -->
                         <div class="fact-counter style-three">
                             <div class="row clearfix">
@@ -130,11 +131,11 @@
                                             <div class="count-outer count-box alternate">
                                                 <span class="count-text" data-speed="5000" data-stop="2854">0</span>+
                                             </div>
-                                            <h4 class="counter-title">Complete Project</h4>
+                                            <h4 class="counter-title">{{ __('main.complete_projects') }}</h4>
                                         </div>
                                     </div>
                                 </div>
-
+                
                                 <!-- Column -->
                                 <div class="column counter-column col-lg-6 col-md-6 col-sm-12">
                                     <div class="inner wow fadeInLeft" data-wow-delay="600ms" data-wow-duration="1500ms">
@@ -143,20 +144,22 @@
                                             <div class="count-outer count-box">
                                                 <span class="count-text" data-speed="3000" data-stop="3">0</span>M
                                             </div>
-                                            <h4 class="counter-title">Company Followers</h4>
+                                            <h4 class="counter-title">{{ __('main.company_followers') }}</h4>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
+                
                         <!-- Button Box -->
                         <div class="button-box">
-                            <a class="btn-style-three theme-btn" href="services.html"><span class="txt">More
-                                    About Us</span></a>
+                            <a class="btn-style-three theme-btn" href="{{ route('about') }}">
+                                <span class="txt">{{ __('main.more_about_us') }}</span>
+                            </a>
                         </div>
                     </div>
                 </div>
+                
 
                 <!-- Form Column -->
                 <div class="form-column col-lg-6 col-md-12 col-sm-12">
@@ -394,7 +397,7 @@
                                 <div class="inner-box">
                                     <div class="block-number">1.</div>
                                     <span class="icon"><i class="fa-solid fa-comments"></i></span>
-                                    <h5><a href="project-planning.html">{{ __('main.faq_feature_1') }}</a></h5>
+                                    <h5><a href="javascript:void()">{{ __('main.faq_feature_1') }}</a></h5>
                                 </div>
                             </div>
 
@@ -403,7 +406,7 @@
                                 <div class="inner-box">
                                     <div class="block-number">2.</div>
                                     <span class="icon"><i class="fa-solid fa-paint-brush"></i></span>
-                                    <h5><a href="project-planning.html">{{ __('main.faq_feature_2') }}</a></h5>
+                                    <h5><a href="javascript:void()">{{ __('main.faq_feature_2') }}</a></h5>
                                 </div>
                             </div>
 
@@ -412,7 +415,7 @@
                                 <div class="inner-box">
                                     <div class="block-number">3.</div>
                                     <span class="icon"><i class="fa-solid fa-check-double"></i></span>
-                                    <h5><a href="project-planning.html">{{ __('main.faq_feature_3') }}</a></h5>
+                                    <h5><a href="javascript:void()">{{ __('main.faq_feature_3') }}</a></h5>
                                 </div>
                             </div>
 
@@ -421,7 +424,7 @@
                                 <div class="inner-box">
                                     <div class="block-number">4.</div>
                                     <span class="icon"><i class="fa-solid fa-truck"></i></span>
-                                    <h5><a href="project-planning.html">{{ __('main.faq_feature_4') }}</a></h5>
+                                    <h5><a href="javascript:void()">{{ __('main.faq_feature_4') }}</a></h5>
                                 </div>
                             </div>
                         </div>
@@ -533,7 +536,7 @@
                             </div>
                             <div class="lower-content">
                                 <h5>
-                                    <a href="blog-detail.html">{{ $blog['title_' . app()->getLocale()] }}</a>
+                                    <a href="{{ route('blog-detail', $blog->id) }}">{{ $blog['title_' . app()->getLocale()] }}</a>
                                 </h5>
                                 <ul class="post-meta">
                                     <li>

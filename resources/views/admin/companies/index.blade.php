@@ -1,11 +1,11 @@
 <x-layouts.admin>
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Contacts</h1>
+            <h1>Companies</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item">Contacts</li>
+                    <li class="breadcrumb-item">Companies</li>
                     <li class="breadcrumb-item active">List</li>
                 </ol>
             </nav>
@@ -17,13 +17,15 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h5 class="card-title">Customer Contacts</h5>
+                                <h5 class="card-title">Company List</h5>
+                                <a href="{{ route('admin.companies.create') }}" class="btn btn-primary">Create New Company</a>
+
                             </div>
                             <div class="mb-3">
-                                <input type="text" id="search-input" class="form-control" placeholder="Search contacts...">
+                                <input type="text" id="search-input" class="form-control" placeholder="Search companies...">
                             </div>
-                            <div id="contact-list-container">
-                                @include('admin.contacts.partials.contact_list', ['contacts' => $contacts])
+                            <div id="company-list-container">
+                                @include('admin.companies.partials.company_list', ['companies' => $companies])
                             </div>
                         </div><!-- End card-body -->
                     </div><!-- End card -->
@@ -35,12 +37,12 @@
     <script>
         document.getElementById('search-input').addEventListener('keyup', function(){
             let query = this.value;
-            fetch("{{ route('admin.contacts.filter') }}?search=" + encodeURIComponent(query))
+            fetch("{{ route('admin.companies.filter') }}?search=" + encodeURIComponent(query))
                 .then(response => response.text())
                 .then(html => {
-                    document.getElementById('contact-list-container').innerHTML = html;
+                    document.getElementById('company-list-container').innerHTML = html;
                 })
-                .catch(error => console.error('Error fetching filtered contacts:', error));
+                .catch(error => console.error('Error fetching filtered companies:', error));
         });
     </script>
 </x-layouts.admin>

@@ -18,7 +18,6 @@
               <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                   <h5 class="card-title">Comments Data</h5>
-                  <a href="{{ route('admin.comments.create') }}" class="btn btn-primary">Create New Comment</a>
                 </div>
                 <div class="mb-3">
                   <input type="text" id="search-input" class="form-control" placeholder="Search comments...">

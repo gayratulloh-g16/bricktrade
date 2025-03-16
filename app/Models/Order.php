@@ -13,6 +13,8 @@ class Order extends Model
         'total_amount',
         'order_status',
         'shipping_address',
+        'latitude',
+        'longitude'
     ];
 
     /**

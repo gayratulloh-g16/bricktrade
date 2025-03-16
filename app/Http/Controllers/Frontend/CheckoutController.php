@@ -24,6 +24,8 @@ class CheckoutController extends Controller
             'city'       => 'required|string|max:255',
             'email'      => 'required|email|max:255',
             'phone'      => 'nullable|string|max:20',
+            'latitude'   => 'required|numeric',
+            'longitude'  => 'required|numeric',
         ]);
 
         $cart = session('cart', []);
@@ -42,6 +44,8 @@ class CheckoutController extends Controller
             'total_amount'     => $total,
             'order_status'     => 'new',
             'shipping_address' => $data['address'] . ' ' . ($data['address2'] ?? '') . ', ' . $data['city'],
+            'latitude'         => $data['latitude'],
+            'longitude'        => $data['longitude'],
         ]);
 
         foreach ($cart as $productId => $item) {
@@ -62,13 +66,14 @@ class CheckoutController extends Controller
 
         $telegramMessage  = "📦 *New Order Received!*\n";
         $telegramMessage .= "🆔 *Order ID:* {$order->id}\n";
-        $telegramMessage .= "👤 *User:* " . Auth::user()->first_name . " " . Auth::user()->last_name . "\n";
+        $telegramMessage .= "👤 *Customer:* " . Auth::user()->first_name . " " . Auth::user()->last_name . "\n";
         $telegramMessage .= "✉️ *Email:* " . Auth::user()->email . "\n";
         $telegramMessage .= "📞 *Phone:* " . (Auth::user()->phone ?? $data['phone'] ?? 'N/A') . "\n";
         $telegramMessage .= "🔖 *Status:* " . ucfirst($order->order_status) . "\n";
         $telegramMessage .= "💰 *Total:* {$total}\n";
         $telegramMessage .= "🏠 *Shipping Address:* " . $order->shipping_address . "\n\n";
         $telegramMessage .= "🧱 *Order Items:*\n";
+        $telegramMessage.= " *Warehouse:* ". $brick->residual;
 
         foreach ($cart as $productId => $item) {
             $brick = Brick::find($productId);
@@ -123,5 +128,13 @@ class CheckoutController extends Controller
     {
         $order->load('orderItems.brick.images');
         return view('frontend.order-details', compact('order'));
+    }
+
+    public function cancel($id)
+    {
+        $order = Order::where('id', $id)->where('order_status', 'new')->firstOrFail();
+        $order->update(['order_status' => 'cancelled']);
+
+        return redirect()->route('orders')->with('success', __('main.order_cancelled'));
     }
 }

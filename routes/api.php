@@ -14,6 +14,8 @@ use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\FeedbackController as AdminFeedbackController;
 use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\CompanyController as AdminCompanyController;
+
 
 use App\Http\Controllers\Frontend\BlogController as FrontendBlogController;
 use App\Http\Controllers\Frontend\ContactController as FrontendContactController;
@@ -41,6 +43,7 @@ Route::get('admin/orders/filter', [AdminOrderController::class, 'filter'])->name
 Route::get('admin/feedback/filter', [AdminFeedbackController::class, 'filter'])->name('admin.feedback.filter');
 Route::get('admin/reviews/filter', [AdminReviewController::class, 'filter'])->name('admin.reviews.filter');
 Route::get('admin/users/filter', [AdminUserController::class, 'filter'])->name('admin.users.filter');
+Route::get('admin/companies/filter', [AdminCompanyController::class, 'filter'])->name('admin.companies.filter');
 
 Route::post('/blog/comment/store', [FrontendBlogController::class, 'storeComment'])->name('blog.comment.store');
 

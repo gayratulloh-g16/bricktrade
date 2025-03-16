@@ -18,13 +18,13 @@ class FeedbackController extends Controller
             'rating'   => 'required|numeric|min:1|max:5',
             'text'     => 'required|string',
         ]);
-        
+
         // Retrieve the order using the order_id from the form
         $order = Order::find($data['order_id']);
         if (!$order) {
             return redirect()->back()->withErrors(['order_id' => 'Invalid order.']);
         }
-        
+
         // Check that the order is completed and no feedback exists yet
         if ($order->order_status !== 'completed') {
             return redirect()->back()->withErrors(['order' => 'Feedback can only be submitted for completed orders.']);
@@ -32,11 +32,11 @@ class FeedbackController extends Controller
         if ($order->feedback) {
             return redirect()->back()->withErrors(['order' => 'Feedback for this order has already been submitted.']);
         }
-        
+
         // Create the feedback record
         Feedback::create($data);
-        
-        return redirect()->route('order.detail')
+
+        return redirect()->route('order.detail', ['order' => $order->id])
             ->with('success', 'Feedback submitted successfully.');
     }
 }

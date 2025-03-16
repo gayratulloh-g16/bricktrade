@@ -12,7 +12,7 @@
                                   <div class="footer-widget logo-widget">
                                       <div class="widget-content">
                                           <div class="logo">
-                                              <a href="index.html"><img src="/frontend/assets/images/logo-3.png"
+                                              <a href="{{ route('home')}}"><img src="/frontend/assets/images/logo-3.png"
                                                       alt="" /></a>
                                           </div>
                                           <div class="text">

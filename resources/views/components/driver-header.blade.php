@@ -21,45 +21,36 @@
 
             <li class="nav-item dropdown">
                 @php
-                    $newOrders = \App\Models\Order::where('order_status', 'new')
-                        ->orderBy('created_at', 'desc')
-                        ->get();
+                    use Illuminate\Support\Facades\Auth;
+                    $driverNotifications = Auth::user()->unreadNotifications()->latest()->limit(5)->get();
                 @endphp
                 <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                     <i class="bi bi-bell"></i>
-                    <span class="badge bg-primary badge-number">{{ $newOrders->count() }} </span>
+                    <span class="badge bg-primary badge-number">{{ $driverNotifications->count() }}</span>
                 </a><!-- End Notification Icon -->
-
-
+            
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
                     <li class="dropdown-header">
-                        You have {{ $newOrders->count() }} new notifications
-                        {{-- <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a> --}}
+                        You have {{ $driverNotifications->count() }} unread notifications
                     </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    @foreach ($newOrders as $order)
-                        <a href="{{ route('admin.orders.edit', $order->id) }}">
+                    <li><hr class="dropdown-divider"></li>
+            
+                    @foreach ($driverNotifications as $notification)
+                        <a href="{{ route('driver.orders.show', $notification->data['order_id']) }}">
                             <li class="notification-item">
-                                <i class="bi bi-info-circle text-primary"></i>
+                                <i class="bi bi-truck text-success"></i>
                                 <div>
-                                    <h4>Order #{{ $order->id }}</h4>
-                                    <p>Shipping: {{ $order->shipping_address }}</p>
-                                    <p>{{ $order->created_at->diffForHumans() }}</p>
+                                    <h4>{{ $notification->data['message'] }}</h4>
+                                    <p>{{ \Carbon\Carbon::parse($notification->created_at)->diffForHumans() }}</p>
                                 </div>
                             </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
+                            <li><hr class="dropdown-divider"></li>
                         </a>
                     @endforeach
-                    {{-- <li class="dropdown-footer">
-                        <a href="#">Show all notifications</a>
-                    </li> --}}
                 </ul>
-
-            </li><!-- End Notification Nav -->
+            </li>
+            
+            
 
 
 

@@ -128,7 +128,7 @@
                                 </div>
                                 <ul class="blog-cat-two">
                                     @foreach ($categories as $category)
-                                    <li class="active"><a href="accurate-measurements.html">{{ $category['name_'.app()->getLocale()]}}<span>{{ $category->blogs->count() }}</span></a></li>
+                                    <li class="active"><a href="{{ route('blog-detail', $blog->id) }}">{{ $category['name_'.app()->getLocale()]}}<span>{{ $category->blogs->count() }}</span></a></li>
                                     @endforeach
                                 </ul>
                             </div>

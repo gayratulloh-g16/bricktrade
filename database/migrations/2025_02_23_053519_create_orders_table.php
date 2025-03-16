@@ -19,6 +19,8 @@ return new class extends Migration
             $table->decimal('total_amount', 15, 2);
             $table->string('order_status')->default('new');
             $table->string('shipping_address');
+            $table->decimal('latitude', 10, 7)->nullable()->after('shipping_address');
+            $table->decimal('longitude', 10, 7)->nullable()->after('latitude');
             $table->timestamps();
         });
     }

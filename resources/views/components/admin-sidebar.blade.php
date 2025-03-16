@@ -101,6 +101,13 @@
                   <span>Review</span>
               </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('admin.reviews.*') ? 'active' : '' }}"
+                href="{{ route('admin.companies.index') }}">
+                <i class="bi bi-star"></i>
+                <span>Competetive Companies</span>
+            </a>
+        </li>
 
           <!-- Pages Heading -->
           {{-- <li class="nav-heading">Pages</li> --}}

@@ -22,17 +22,15 @@
                 <div class="content-column col-lg-6 col-md-12 col-sm-12">
                     <div class="inner-column">
                         <div class="sec-title">
-                            <div class="title">South-central construction region since 2009</div>
-                            <h2>Comfortable <span>joining</span> <br> in one open space.</h2>
-                            <div class="text">USA Construction Company, Inc. was founded in 2003 and quickly
-                                established a reputation for top quality work. Throughout our history, one philosophy
-                                has remained Predominant, Total Quality Performance. Lorem ipsum dolor sit amet,
-                                consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis.</div>
+                            <div class="title">{{ __('main.construction_region') }}</div>
+                            <h2>{!! __('main.comfortable_joining', ['span' => '<span>', 'br' => '<br>']) !!}</h2>
+                            <div class="text">{{ __('main.company_description') }}</div>
                         </div>
+                
                         <!-- Fact Counter / Style Three -->
                         <div class="fact-counter style-three">
                             <div class="row clearfix">
-
+                
                                 <!-- Column -->
                                 <div class="column counter-column col-lg-6 col-md-6 col-sm-12">
                                     <div class="inner wow fadeInLeft" data-wow-delay="300ms" data-wow-duration="1500ms">
@@ -41,11 +39,11 @@
                                             <div class="count-outer count-box alternate">
                                                 <span class="count-text" data-speed="5000" data-stop="2854">0</span>+
                                             </div>
-                                            <h4 class="counter-title">Complete Project</h4>
+                                            <h4 class="counter-title">{{ __('main.complete_project') }}</h4>
                                         </div>
                                     </div>
                                 </div>
-
+                
                                 <!-- Column -->
                                 <div class="column counter-column col-lg-6 col-md-6 col-sm-12">
                                     <div class="inner wow fadeInLeft" data-wow-delay="600ms" data-wow-duration="1500ms">
@@ -54,24 +52,28 @@
                                             <div class="count-outer count-box">
                                                 <span class="count-text" data-speed="3000" data-stop="3">0</span>M
                                             </div>
-                                            <h4 class="counter-title">Company Followers</h4>
+                                            <h4 class="counter-title">{{ __('main.company_followers') }}</h4>
                                         </div>
                                     </div>
                                 </div>
-
+                
                             </div>
                         </div>
-
-
+                
+                        <!-- Button Box -->
+                        <div class="button-box">
+                            <a class="btn-style-three theme-btn" href="{{ route('about')}}"><span class="txt">{{ __('main.more_about_us') }}</span></a>
+                        </div>
                     </div>
                 </div>
+                
 
                 <!-- Image Column -->
                 <div class="image-column col-lg-6 col-md-12 col-sm-12">
                     <div class="inner-column">
                         <div class="year-box">
                             <div class="count-box">
-                                0<span class="count-text" data-speed="5000" data-stop="8">0</span>
+                                0<span class="count-text" data-speed="5000" data-stop="16">0</span>
                             </div>
                             <span class="years">Years</span>
                         </div>
